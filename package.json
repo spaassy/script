@@ -5,7 +5,7 @@
   "description": "",
   "keywords": ["spaAssay", "spa", "react"],
   "bin": {
-    "start": "./bin/index.js"
+    "spaAssay-script": "./bin/index.js"
   },
   "main": "index.js",
   "repository": {
