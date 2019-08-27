@@ -1,2 +1,2 @@
-# script
-spaAssy-script
+# template
+spaAssy-template
