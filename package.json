@@ -1,9 +1,14 @@
 {
-  "name": "spaAssay",
+  "name": "spaAssay-script",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "keywords": ["spaAssay", "spa", "react"],
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spaassy/script.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=dev node bin/start.js",
