@@ -1,11 +1,11 @@
 {
-  "name": "spaAssay-script",
+  "name": "spaAssy-script",
   "version": "1.0.1",
   "private": true,
   "description": "",
-  "keywords": ["spaAssay", "spa", "react"],
+  "keywords": ["spaAssy", "spa", "react"],
   "bin": {
-    "spaAssayStart": "./bin/index.js"
+    "spaAssyStart": "./bin/index.js"
   },
   "main": "index.js",
   "repository": {
