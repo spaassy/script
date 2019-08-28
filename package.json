@@ -3,7 +3,11 @@
   "version": "1.0.1",
   "private": true,
   "description": "",
-  "keywords": ["spaAssy", "spa", "react"],
+  "keywords": [
+    "spaAssy",
+    "spa",
+    "react"
+  ],
   "bin": {
     "spaAssyStart": "./bin/index.js"
   },
@@ -20,7 +24,8 @@
   "author": "yvesZhang",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "react-dev-utils": "^9.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
