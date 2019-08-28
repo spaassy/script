@@ -9,6 +9,17 @@ const srcPath = path.resolve(__dirname, '../../')
 
 const _webpack = require(path.resolve(srcPath, '_webpack.js'))
 
+let alias = {
+    ..._webpack.webpack.alias
+} || {
+    '@': path.resolve(srcPath, 'src'),
+    '@assets': path.resolve(srcPath, 'src/assets'),
+    '@http': path.resolve(srcPath, 'src/httpServer'),
+    '@mobx': path.resolve(srcPath, 'src/mobx'),
+    '@views': path.resolve(srcPath, 'src/views'),
+    '@commonComponents': path.resolve(srcPath, 'src/commonComponents')
+}
+
 module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -92,15 +103,7 @@ module.exports = {
     ],
     resolve: {
         //配置别名，在项目中可缩减引用路径
-        alias: {
-            // '@': path.resolve(srcPath, 'src'),
-            // '@assets': path.resolve(srcPath, 'src/assets'),
-            // '@http': path.resolve(srcPath, 'src/httpServer'),
-            // '@mobx': path.resolve(srcPath, 'src/mobx'),
-            // '@views': path.resolve(srcPath, 'src/views'),
-            // '@commonComponents': path.resolve(srcPath, 'src/commonComponents'),
-            ..._webpack.webpack.alias
-        },
+        alias: alias,
         extensions: ['.jsx', '.js', '.json', '.scss', '.css', '.less']
     }
 };
