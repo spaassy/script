@@ -5,6 +5,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPugin = require('copy-webpack-plugin')
 const dev_env = process.env.NODE_ENV == 'dev';
 
+const srcPath = path.resolve(__dirname, '../../')
+
 module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -82,19 +84,19 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPugin([{
-            from: path.join(__dirname, 'src/assets'),
-            to: path.join(__dirname, 'dist', 'assets')
+            from: path.join(srcPath, 'src/assets'),
+            to: path.join(srcPath, 'dist', 'assets')
         }])
     ],
     resolve: {
         //配置别名，在项目中可缩减引用路径
         alias: {
-            '@': path.resolve(__dirname, 'src'),
-            '@assets': path.resolve(__dirname, 'src/assets'),
-            '@http': path.resolve(__dirname, 'src/httpServer'),
-            '@mobx': path.resolve(__dirname, 'src/mobx'),
-            '@views': path.resolve(__dirname, 'src/views'),
-            '@commonComponents': path.resolve(__dirname, 'src/commonComponents'),
+            '@': path.resolve(srcPath, 'src'),
+            '@assets': path.resolve(srcPath, 'src/assets'),
+            '@http': path.resolve(srcPath, 'src/httpServer'),
+            '@mobx': path.resolve(srcPath, 'src/mobx'),
+            '@views': path.resolve(srcPath, 'src/views'),
+            '@commonComponents': path.resolve(srcPath, 'src/commonComponents'),
         },
         extensions: ['.jsx', '.js', '.json', '.scss', '.css', '.less']
     }
