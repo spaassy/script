@@ -15,7 +15,6 @@ let alias = {
     '@': path.resolve(srcPath, 'src'),
     '@assets': path.resolve(srcPath, 'src/assets'),
     '@http': path.resolve(srcPath, 'src/httpServer'),
-    '@mobx': path.resolve(srcPath, 'src/mobx'),
     '@views': path.resolve(srcPath, 'src/views'),
     '@commonComponents': path.resolve(srcPath, 'src/commonComponents')
 }
