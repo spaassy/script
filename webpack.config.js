@@ -22,7 +22,7 @@ const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMN
 
 module.exports = {
     output: {
-        path: path.resolve(srcPath, 'dist/'),
+        path: path.resolve(srcPath, 'dist'),
         filename: SYSTEMNAME + '/bundle.js',
         publicPath: '/'
     },
@@ -33,14 +33,14 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 1024,
-                        name: 'assets/[name].[hash:5].[ext]'
+                        name: SYSTEMNAME + '/assets/[name].[hash:5].[ext]'
                     }
                 }]
             },
             {
                 test: /(\.jsx|\.js)$/,
                 use: {
-                    loader: "babel-loader"
+                    loader: "babel-loader",
                 },
                 exclude: /node_modules/
             },
@@ -88,8 +88,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: '[name].css',
-            chunkFilename: '[id].css',
+            filename: SYSTEMNAME + '/[name].css',
+            chunkFilename: SYSTEMNAME + '/[id].css',
         }),
         new HtmlWebpackPlugin({
             title: 'My App',
