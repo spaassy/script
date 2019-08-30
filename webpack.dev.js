@@ -7,7 +7,7 @@ const path = require('path')
 
 
 const srcPath = path.resolve(__dirname, '../../')
-const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
+const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js')).webpack
 
 const webpackDev = {
     entry: ['webpack-hot-middleware/client.js', './src/index.jsx'],
