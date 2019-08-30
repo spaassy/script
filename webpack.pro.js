@@ -1,6 +1,7 @@
 const merge = require("webpack-merge");
 const webpackConfig = require("./webpack.config");
 const webpack = require("webpack")
+const path = require('path')
 
 
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))

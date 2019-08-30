@@ -3,7 +3,7 @@ const webpackConfig = require("./webpack.config");
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const hostConfig = require('./bin/server.config');
 const webpack = require('webpack');
-
+const path = require('path')
 
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 
