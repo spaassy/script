@@ -18,10 +18,13 @@ let alias = {
     '@commonComponents': path.resolve(srcPath, 'src/commonComponents')
 }
 
+const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`])
+
 module.exports = {
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        path: path.resolve(srcPath, 'dist/'),
+        filename: SYSTEMNAME + '/bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [{
@@ -96,7 +99,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new CopyWebpackPugin([{
             from: path.join(srcPath, 'src/assets'),
-            to: path.join(srcPath, 'dist', 'assets')
+            to: path.join(srcPath, 'dist/' + SYSTEMNAME, 'assets')
         }])
     ],
     resolve: {
