@@ -4,12 +4,16 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const hostConfig = require('./bin/server.config');
 const webpack = require('webpack');
 
+
+const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
+
 const webpackDev = {
     entry: ['webpack-hot-middleware/client.js', './src/index.jsx'],
     mode: 'development',
     plugins: [
         new webpack.DefinePlugin({
-            "process.env.NODE_ENV":JSON.stringify(process.env.NODE_ENV)
+            "process.env.NODE_ENV":JSON.stringify(process.env.NODE_ENV),
+            ..._webpack.env_variable || null
         }),
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({
