@@ -1,7 +1,7 @@
 const path = require('path')
 const srcPath = path.resolve(__dirname, '../../../')
 
-const serverConfig = require(path.resolve(srcPath, '_webpack.js')).server
+const serverConfig = require(path.resolve(srcPath, '_spaassyConfig.js')).server
 
 let config = {
     host: '127.0.0.1',
