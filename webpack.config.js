@@ -6,7 +6,6 @@ const CopyWebpackPugin = require('copy-webpack-plugin')
 const dev_env = process.env.NODE_ENV == 'dev';
 
 const srcPath = path.resolve(__dirname, '../../')
-
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 
 let alias = {

@@ -5,6 +5,8 @@ const hostConfig = require('./bin/server.config');
 const webpack = require('webpack');
 const path = require('path')
 
+
+const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 
 const webpackDev = {
