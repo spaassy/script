@@ -1,0 +1,21 @@
+const merge = require("webpack-merge");
+const webpackConfig = require("./webpack.config");
+const webpack = require("webpack")
+const path = require('path')
+
+
+const srcPath = path.resolve(__dirname, '../../')
+const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js')).webpack
+
+const webpackPro = {
+    entry: ['./_spaassySubConfig.jsx'],
+    mode: 'production',
+    plugins: [
+        new webpack.DefinePlugin({
+            "process.env.NODE_ENV":JSON.stringify(process.env.NODE_ENV),
+            ..._webpack.env_variable || null
+        })
+    ]
+};
+
+module.exports = merge(webpackConfig, webpackPro);
