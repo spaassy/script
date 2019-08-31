@@ -8,7 +8,7 @@ const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js')).webpack
 
 const webpackPro = {
-    entry: ['./_spaassySubConfig.jsx'],
+    entry: ['./_spaassySubConfig.js'],
     mode: 'production',
     plugins: [
         new webpack.DefinePlugin({
