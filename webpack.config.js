@@ -50,7 +50,8 @@ module.exports = {
                 use: [dev_env ? "style-loader" : {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            minimize: true
+                            minimize: true,
+                            publicPath: '../'
                         }
                     },
                     {
@@ -66,7 +67,8 @@ module.exports = {
                 use: [dev_env ? "style-loader" : {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            minimize: true
+                            minimize: true,
+                            publicPath: '../'
                         }
                     },
                     {
@@ -89,8 +91,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: '[name].css',
-            chunkFilename: '[id].css',
+            filename: SYSTEMNAME + '[name].css',
+            chunkFilename: SYSTEMNAME + '[id].css',
         }),
         new HtmlWebpackPlugin({
             title: 'My App',
