@@ -6,7 +6,7 @@ const webpack = require('webpack');
 webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
         // Handle errors here
-        console.log("webpack build 出错!")
+        console.log(err, stats.compilation.errors)
         return;
     }
     process.stdout.write(stats.toString({
