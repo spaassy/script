@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPugin = require('copy-webpack-plugin')
-const dev_env = process.env.NODE_ENV == 'dev';
+const dev_env = process.env.NODE_ENV == 'devlopment';
 
 const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
@@ -18,11 +18,12 @@ let alias = {
     '@commonComponents': path.resolve(srcPath, 'src/commonComponents')
 }
 
-const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`])
+const sub = process.env.BUILD_TYPE || ''
+const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`]) + sub
 
 module.exports = {
     output: {
-        path: path.resolve(srcPath, 'dist'),
+        path: path.resolve(srcPath, 'dist' + sub),
         filename: SYSTEMNAME + '/bundle.js',
         publicPath: './'
     },
@@ -33,7 +34,7 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 1024,
-                        name: SYSTEMNAME + '/assets/[name].[hash:5].[ext]'
+                        name: SYSTEMNAME + '/assets/images/[name].[hash:5].[ext]'
                     }
                 }]
             },
@@ -88,8 +89,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: SYSTEMNAME + '/[name].css',
-            chunkFilename: SYSTEMNAME + '/[id].css',
+            filename: '[name].css',
+            chunkFilename: '[id].css',
         }),
         new HtmlWebpackPlugin({
             title: 'My App',
@@ -99,7 +100,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new CopyWebpackPugin([{
             from: path.join(srcPath, 'src/assets'),
-            to: path.join(srcPath, 'dist/' + SYSTEMNAME, 'assets')
+            to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, 'assets')
         }])
     ],
     resolve: {
