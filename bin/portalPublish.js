@@ -47,13 +47,19 @@ portal.subProject.map((item, index) => {
 
     let addLink = ''
     let addScript = ''
-    resource.css.map((sucCss, indexCss) => {
-        addLink = addLink + sucCss + '\n'
+    resource.css.map((subCss, indexCss) => {
+        if (portalHtmlData.indexOf(subCss) > -1) {
+            return
+        }
+        addLink = addLink + subCss + '\n'
     })
     addLink = addLink + '\t' + injectLink + '\n'
 
-    resource.js.map((sucJs, indexJs) => {
-        addScript = addScript + sucJs + '\n'
+    resource.js.map((subJs, indexJs) => {
+        if (portalHtmlData.indexOf(subJs) > -1) {
+            return
+        }
+        addScript = addScript + subJs + '\n'
     })
     addScript = addScript + '\t' + injectScript + '\n'
 
@@ -71,7 +77,7 @@ portal.subProject.map((item, index) => {
         console.log(err)
     }
 
-    if(!isErr){
+    if (!isErr) {
         console.log(`${item.projectName} 注入成功！`)
     }
 })
