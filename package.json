@@ -18,14 +18,16 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=dev node bin/start.js",
-    "build": "cross-env NODE_ENV=pro node bin/build.js"
+    "start": "cross-env NODE_ENV=devlopment node bin/start.js",
+    "build": "cross-env NODE_ENV=production node bin/build.js",
+    "dll": "cross-env NODE_ENV=production node bin/build.js"
   },
   "author": "yvesZhang",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.11",
-    "react-dev-utils": "^9.0.3"
+    "react-dev-utils": "^9.0.3",
+    "webpack-bundle-analyzer": "^3.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
