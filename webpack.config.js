@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPugin = require('copy-webpack-plugin')
-const dev_env = process.env.NODE_ENV == 'devlopment';
+const dev_env = process.env.NODE_ENV == 'development';
 
 const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))

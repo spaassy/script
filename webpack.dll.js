@@ -1,4 +1,4 @@
-const path = require('patch')
+const path = require('path')
 const webpack = require('webpack')
 const {
     BundleAnalyzerPlugin
@@ -15,7 +15,7 @@ let dllConfig = {
     entry: _webpack.webpack.vendor.entry,
     output: {
         path: path.resolve(srcPath, 'dist' + sub),
-        filename: ENV === 'devlopment' ? 'dll.[name].dev.js' : 'dll.[name].js',
+        filename: ENV === 'development' ? 'dll.[name].dev.js' : 'dll.[name].js',
         publicPath: './'
     },
     module: {
@@ -34,7 +34,7 @@ let dllConfig = {
     plugins: [
         new webpack.DllPlugin({
             name: "[name]",
-            path: path.join(__dirname, `dll${ENV==='devlopment'?'dev':'pro'}`, '[name]-manifest.json')
+            path: path.join(__dirname, `dll${ENV==='development'?'dev':'pro'}`, '[name]-manifest.json')
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static'
