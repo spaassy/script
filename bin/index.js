@@ -30,7 +30,7 @@ const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 
 // src 文件路径
-const srcPath = path.resolve(__dirname, '../../')
+const srcPath = path.resolve(__dirname, '../../../')
 
 const ENV = process.env.NODE_ENV
 
