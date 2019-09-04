@@ -1,9 +1,51 @@
 const path = require('path');
+const utils = require('./utils');
+const getFilesName = utils.getFilesName;
+const fileIsExist = utils.fileIsExist
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPugin = require('copy-webpack-plugin')
 const dev_env = process.env.NODE_ENV == 'development';
+
+
+const createDllPlugin = () => {
+    let plugins = []
+    let floderPath = dev_env ? `./${dllDev}` : `./${dllPro}`
+    if (!fileIsExist(floderPath)) {
+        return plugins
+    }
+
+    const files = getFilesName(floderPath).files
+    files.map((item, index) => {
+        plugins.push(new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: path.resolve(__dirname, floderPath, `/${item}`)
+        }))
+    })
+}
+
+copyVendors = () => {
+    let copyList = []
+    let floderPath
+    let disFloder = null
+    if (ENV === 'development') {
+        floderPath = path.resolve(srcPath, 'vendorsDev')
+        disFloder = 'vendorDev'
+    } else if (ENV === 'production') {
+        floderPath = path.resolve(srcPath, 'vendorsPro')
+        disFloder = 'vendorPro'
+    }
+
+    if (!fileIsExist(floderPath)) {
+        return copyList
+    }
+
+    copyList.push({
+        from: floderPath,
+        to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, disFloder)
+    })
+}
 
 const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
@@ -101,9 +143,12 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPugin([{
-            from: path.join(srcPath, 'src/assets'),
-            to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, 'assets')
-        }])
+                from: path.join(srcPath, 'src/assets'),
+                to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, 'assets')
+            },
+            ...copyVendors()
+        ]),
+        ...createDllPlugin()
     ],
     resolve: {
         //配置别名，在项目中可缩减引用路径

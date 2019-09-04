@@ -1,18 +1,12 @@
 const portal = require('../../../_spaassyProralConfig')
 const fs = require('fs')
+const utils = require('../utils');
 
 // 读取文件方法
-const readFileSync = (path) => {
-    return fs.readFileSync(path, 'utf8')
-}
+const readFileSync = utils.readFileSync
 
 // 写入文件方法
-const writeFileSync = (path, data) => {
-    fs.writeFileSync(path, data, {
-        encoding: 'utf8',
-        flag: 'w'
-    });
-}
+const writeFileSync = utils.writeFileSync
 
 // 读取portald的html文件 保存起来
 let portalHtmlData = readFileSync(portal.protalTarget)
