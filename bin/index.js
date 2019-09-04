@@ -42,7 +42,7 @@ const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMN
 if (['build', 'start', 'buildSub'].indexOf(script) > -1) {
 	let htmlPath = path.resolve(srcPath, 'index.html')
 	let vendorFloderPath = ENV === 'development' ? path.resolve(srcPath, 'src/assets/vendorsDev') : path.resolve(srcPath, 'src/assets/vendorsPro')
-	let vendorPrefixPath = ENV === 'development' ? `./${SYSTEMNAME}/assets/vendorsDev/` : `${SYSTEMNAME}/assets/vendorsPro/`
+	let vendorPrefixPath = ENV === 'development' ? `${SYSTEMNAME}/assets/vendorsDev/` : `${SYSTEMNAME}/assets/vendorsPro/`
 	let injectRegEx = ['<!-- [start inject vendors] -->', '<!-- [end inject vendors] -->']
 	injectVendor(htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
 }

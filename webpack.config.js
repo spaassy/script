@@ -6,12 +6,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPugin = require('copy-webpack-plugin')
+const Webpack = require('webpack')
 const dev_env = process.env.NODE_ENV == 'development';
 
 
 const createDllPlugin = () => {
     let plugins = []
-    let floderPath = dev_env ? `./dlldev` : `./dllpro`
+    let floderPath = path.resolve(__dirname, `${dev_env ? 'dlldev' : 'dllpro'}`)
+    console.log(floderPath)
     if (!fileIsExist(floderPath)) {
         return plugins
     }
@@ -21,11 +23,13 @@ const createDllPlugin = () => {
         return plugins
     }
     files.map((item, index) => {
-        plugins.push(new webpack.DllReferencePlugin({
+        plugins.push(new Webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: path.resolve(__dirname, floderPath, `/${item}`)
+            manifest: path.resolve(__dirname, floderPath, `${item}`)
         }))
     })
+
+    return plugins
 }
 
 // copyVendors = () => {
@@ -136,8 +140,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: SYSTEMNAME + '[name].css',
-            chunkFilename: SYSTEMNAME + '[id].css',
+            filename: SYSTEMNAME + '/[name].css',
+            chunkFilename: SYSTEMNAME + '/[id].css',
         }),
         new HtmlWebpackPlugin({
             title: 'My App',

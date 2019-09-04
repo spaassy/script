@@ -33,6 +33,7 @@ const fileIsExist = (folderPath) => {
     } catch (error) {
         err = true
         console.error('no such files or directory!')
+        console.log(error)
     }
 
     if (err) {
@@ -85,19 +86,28 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
     let vendorList = getFilesName(vendorFloderPath).files || null
     let srcList = ''
     let newSrc = null
-    let regEx = new RegExp(`${injectRegEx[0]}([.\\n]*)${injectRegEx[1]}`)
+
+    let regEx = new RegExp("\<!--[\r\n\t\s]*\[start inject vendors\][\r\n\t\s]*--\>")
 
     if (!vendorList || vendorList.length == 0) {
         return
     }
     vendorList.map((item, name) => {
-        let src = `<script src="${vendorPrefixPath}${item}"></script>` + '\n'
-        srcList = srcList + src
+        let arr = item.split('.')
+        let len = arr.length
+        if (arr[len - 1] !== 'js') {
+            return
+        }
+        let src = `<script src="./${vendorPrefixPath}${item}"></script>`
+        if (htmlData.indexOf(src) > -1) {
+            return
+        }
+        srcList = '\n' + srcList + `\t${src}\n`
     })
 
-    newSrc = `${injectRegEx[0]}\n${srcList}${injectRegEx[1]}\n`
+    newSrc = `${injectRegEx[0]}${srcList}\t${injectRegEx[1]}`
 
-    htmlData = htmlData.replace(regEx, newSrc)
+    htmlData = htmlData.replace(/\<!--[\r\n\t\s]*\[start inject vendors\][\r\n\t\s]*--\>[\r\t\n]*.*[\r\t\n]*\<!--[\r\n\t\s]*\[end inject vendors\][\r\n\t\s]*--\>/, newSrc)
     writeFileSync(htmlPath, htmlData)
 }
 
