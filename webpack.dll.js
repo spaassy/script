@@ -8,6 +8,9 @@ const ENV = process.env.NODE_ENV
 const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 
+const sub = process.env.BUILD_TYPE || ''
+const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`]) + sub
+
 let dllConfig = {
     entry: _webpack.webpack.vendor.entry,
     output: {
