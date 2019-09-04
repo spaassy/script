@@ -34,7 +34,10 @@ let dllConfig = {
     mode: ENV,
     plugins: [
         new CleanWebpackPlugin({
-            cleanoncebeforebuildpatterns: [path.resolve(srcPath, 'src/assets/', `${ENV === 'development' ? 'vendorsDev' : 'vendorsPro'}`)]
+            cleanoncebeforebuildpatterns: [
+                path.resolve(srcPath, 'src/assets/', `${ENV === 'development' ? 'vendorsDev' : 'vendorsPro'}`),
+                path.resolve(__dirname, `${ENV === 'development' ? 'dlldev' : 'dllpro'}`)
+            ]
         }),
         new webpack.DllPlugin({
             name: "[name]",
