@@ -25,27 +25,27 @@ const createDllPlugin = () => {
     })
 }
 
-copyVendors = () => {
-    let copyList = []
-    let floderPath
-    let disFloder = null
-    if (ENV === 'development') {
-        floderPath = path.resolve(srcPath, 'vendorsDev')
-        disFloder = 'vendorDev'
-    } else if (ENV === 'production') {
-        floderPath = path.resolve(srcPath, 'vendorsPro')
-        disFloder = 'vendorPro'
-    }
+// copyVendors = () => {
+//     let copyList = []
+//     let floderPath
+//     let disFloder = null
+//     if (ENV === 'development') {
+//         floderPath = path.resolve(srcPath, 'vendorsDev')
+//         disFloder = 'vendorDev'
+//     } else if (ENV === 'production') {
+//         floderPath = path.resolve(srcPath, 'vendorsPro')
+//         disFloder = 'vendorPro'
+//     }
 
-    if (!fileIsExist(floderPath)) {
-        return copyList
-    }
+//     if (!fileIsExist(floderPath)) {
+//         return copyList
+//     }
 
-    copyList.push({
-        from: floderPath,
-        to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, disFloder)
-    })
-}
+//     copyList.push({
+//         from: floderPath,
+//         to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, disFloder)
+//     })
+// }
 
 const srcPath = path.resolve(__dirname, '../../')
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
@@ -146,7 +146,7 @@ module.exports = {
                 from: path.join(srcPath, 'src/assets'),
                 to: path.join(srcPath, 'dist' + sub + '/' + SYSTEMNAME, 'assets')
             },
-            ...copyVendors()
+            // ...copyVendors()
         ]),
         ...createDllPlugin()
     ],

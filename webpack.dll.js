@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const {
     BundleAnalyzerPlugin
 } = require('webpack-bundle-analyzer')
@@ -32,6 +33,7 @@ let dllConfig = {
     },
     mode: ENV,
     plugins: [
+        new CleanWebpackPlugin([path.resolve(srcPath, 'src/assets/', `${ENV === 'development' ? 'vendorsDev' : 'vendorsPro'}`)]),
         new webpack.DllPlugin({
             name: "[name]",
             path: path.join(__dirname, `dll${ENV==='development'?'dev':'pro'}`, '[name]-manifest.json')
