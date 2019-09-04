@@ -14,7 +14,7 @@ const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMN
 let dllConfig = {
     entry: _webpack.webpack.vendor.entry,
     output: {
-        path: ENV === 'development' ? path.resolve(srcPath, 'src/vendorsDev') : path.resolve(srcPath, 'src/vendorsPro'),
+        path: ENV === 'development' ? path.resolve(srcPath, 'src/assets/vendorsDev') : path.resolve(srcPath, 'src/assets/vendorsPro'),
         filename: ENV === 'development' ? 'dll.[name].dev.js' : 'dll.[name].js',
         publicPath: './'
     },
