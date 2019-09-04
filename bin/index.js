@@ -35,6 +35,7 @@ const srcPath = path.resolve(__dirname, '../../')
 const ENV = process.env.NODE_ENV
 
 const sub = process.env.BUILD_TYPE || ''
+const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`]) + sub
 
 // 往index.html 中注入 vendor
