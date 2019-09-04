@@ -30,7 +30,7 @@ const fileIsExist = (folderPath) => {
     let err = null
     try {
         fs.accessSync(folderPath, fs.constants.R_OK)
-    } catch (err) {
+    } catch (error) {
         err = true
         console.error('no such files or directory!')
     }
@@ -91,7 +91,7 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
         return
     }
     vendorList.map((item, name) => {
-        let src = `<script src="${ivendorPrefixPath}${item}"></script>` + '\n'
+        let src = `<script src="${vendorPrefixPath}${item}"></script>` + '\n'
         srcList = srcList + src
     })
 
