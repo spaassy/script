@@ -20,6 +20,7 @@ const spawn = require('react-dev-utils/crossSpawn');
 const args = process.argv.slice(2);
 const utils = require('../utils')
 const injectVendor = utils.injectVendor
+const path = require('path')
 
 const scriptIndex = args.findIndex(
 	x => x === 'build' || x === 'start' || x === 'buildSub' || x === 'portalPublish' || x === 'dll'
