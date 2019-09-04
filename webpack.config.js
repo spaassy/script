@@ -11,12 +11,15 @@ const dev_env = process.env.NODE_ENV == 'development';
 
 const createDllPlugin = () => {
     let plugins = []
-    let floderPath = dev_env ? `./${dllDev}` : `./${dllPro}`
+    let floderPath = dev_env ? `./dlldev` : `./dllpro`
     if (!fileIsExist(floderPath)) {
         return plugins
     }
 
     const files = getFilesName(floderPath).files
+    if (!files || files.length == 0) {
+        return plugins
+    }
     files.map((item, index) => {
         plugins.push(new webpack.DllReferencePlugin({
             context: __dirname,

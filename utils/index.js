@@ -69,13 +69,15 @@ const writeFileSync = (path, data) => {
  * @param {string[]} injectRegEx html中注入资源位置的正则匹配规则
  */
 const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx) => {
+    let emptyVerdor = `${injectRegEX[0]}\n${injectRegEX[1]}\n`
     if (!fileIsExist(vendorFloderPath)) {
-        console.error('vendor 文件夹不存在！')
+        console.info('vendor 文件夹不存在！')
+        writeFileSync(htmlPath, emptyVerdor)
         return
     }
 
     if (!fileIsExist(htmlPath)) {
-        console.error('html 文件不存在！')
+        console.info('html 文件不存在！')
         return
     }
 
