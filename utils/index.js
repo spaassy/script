@@ -69,7 +69,7 @@ const writeFileSync = (path, data) => {
  * @param {string[]} injectRegEx html中注入资源位置的正则匹配规则
  */
 const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx) => {
-    let emptyVerdor = `${injectRegEX[0]}\n${injectRegEX[1]}\n`
+    let emptyVerdor = `${injectRegEx[0]}\n${injectRegEx[1]}\n`
     if (!fileIsExist(vendorFloderPath)) {
         console.info('vendor 文件夹不存在！')
         writeFileSync(htmlPath, emptyVerdor)
@@ -85,7 +85,7 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
     let vendorList = getFilesName(vendorFloderPath).files || null
     let srcList = ''
     let newSrc = null
-    let regEx = new RegExp(`${injectRegEX[0]}([.\\n]*)${injectRegEX[1]}`)
+    let regEx = new RegExp(`${injectRegEx[0]}([.\\n]*)${injectRegEx[1]}`)
 
     if (!vendorList || vendorList.length == 0) {
         return
@@ -95,7 +95,7 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
         srcList = srcList + src
     })
 
-    newSrc = `${injectRegEX[0]}\n${srcList}${injectRegEX[1]}\n`
+    newSrc = `${injectRegEx[0]}\n${srcList}${injectRegEx[1]}\n`
 
     htmlData = htmlData.replace(regEx, newSrc)
     writeFileSync(htmlPath, htmlData)
