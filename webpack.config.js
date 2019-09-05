@@ -25,13 +25,8 @@ const createDllPlugin = () => {
     files.map((item, index) => {
         plugins.push(new Webpack.DllReferencePlugin({
             context: process.cwd(),
-            manifest: path.resolve(__dirname, floderPath, `${item}`),
-            name: 'vendor'
+            manifest: path.resolve(__dirname, floderPath, `${item}`)
         }))
-        // plugins.push(new Webpack.DllReferencePlugin({
-        //     context: path.resolve(__dirname),
-        //     manifest: path.resolve(__dirname, floderPath, `${item}`)
-        // }))
     })
 
     return plugins
@@ -141,6 +136,33 @@ module.exports = {
                 ],
             }
         ]
+    },
+    optimization: {
+        runtimeChunk: {
+            name: 'manifest'
+        },
+        splitChunks: {
+            chunks: 'all',
+            // miniSize: 30000,
+            // maxSize: 0,
+            minChunks: 1,
+            name: true,
+            cacheGroups: {
+                common: {
+                    name: "common",
+                    test: /node_modules\/(.*)\.js/,
+                    chunks: "initial",
+                    minChunks: 1,
+                    enforce: true
+                },
+                style: {
+                    name: 'styles',
+                    test: /(\.less|\.css)$/,
+                    chunks: 'all',
+                    enforce: true
+                }
+            }
+        }
     },
     plugins: [
         new MiniCssExtractPlugin({

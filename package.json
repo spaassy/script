@@ -27,8 +27,6 @@
   "dependencies": {
     "react-dev-utils": "^9.0.3",
     "webpack-bundle-analyzer": "^3.4.1",
-
-
     "antd": "^3.20.0",
     "axios": "^0.19.0",
     "lodash": "^4.17.11",
@@ -40,7 +38,6 @@
     "redux": "^4.0.4",
     "spaAssy-script": "git+https://github.com/spaassy/script.git",
     "spaassy-redux": "git+https://github.com/spaassy/spaassy-redux.git"
-
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -76,5 +73,8 @@
     "webpack-dev-middleware": "^3.6.2",
     "webpack-hot-middleware": "^2.24.4",
     "webpack-merge": "^4.2.1"
-  }
+  },
+  "_from": "spaAssy-script@git+https://github.com/spaassy/script.git",
+  "_resolved": "https://github.com/spaassy/script.git#master",
+  "__npminstall_done": "Thu Sep 05 2019 16:25:52 GMT+0800 (GMT+08:00)"
 }

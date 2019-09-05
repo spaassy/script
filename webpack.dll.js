@@ -14,12 +14,14 @@ const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMN
 
 
 let dllConfig = {
-    entry: _webpack.webpack.vendor.entry,
+    entry: {
+        ..._webpack.webpack.dll.entry
+    },
     output: {
         path: ENV === 'development' ? path.resolve(srcPath, 'src/assets/vendorsDev') : path.resolve(srcPath, 'src/assets/vendorsPro'),
         filename: ENV === 'development' ? 'dll.[name].dev.js' : 'dll.[name].js',
         publicPath: './',
-        library: '[name]'
+        library: '[name]_dll'
     },
     module: {
         rules: [{
@@ -43,7 +45,7 @@ let dllConfig = {
         }),
         new webpack.DllPlugin({
             context: process.cwd(),
-            name: "[name]",
+            name: "[name]_dll",
             path: path.join(__dirname, `dll${ENV==='development'?'dev':'pro'}`, '[name]-manifest.json')
         }),
         new BundleAnalyzerPlugin({
