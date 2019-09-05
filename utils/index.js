@@ -87,8 +87,6 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
     let srcList = ''
     let newSrc = null
 
-    let regEx = new RegExp("\<!--[\r\n\t\s]*\[start inject vendors\][\r\n\t\s]*--\>")
-
     if (!vendorList || vendorList.length == 0) {
         return
     }
@@ -98,14 +96,18 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
         if (arr[len - 1] !== 'js') {
             return
         }
-        let src = `<script src="./${vendorPrefixPath}${item}"></script>`
+        let src = `<script src="./${vendorPrefixPath}${item}" async="false"></script>`
         if (htmlData.indexOf(src) > -1) {
             return
         }
         srcList = '\n' + srcList + `\t${src}\n`
     })
 
-    newSrc = `${injectRegEx[0]}${srcList}\t${injectRegEx[1]}`
+    if (!srcList || srcList == '') {
+        return
+    }
+
+    newSrc = `${injectRegEx[0]}${srcList||'\n'}\t${injectRegEx[1]}`
 
     htmlData = htmlData.replace(/\<!--[\r\n\t\s]*\[start inject vendors\][\r\n\t\s]*--\>[\r\t\n]*.*[\r\t\n]*\<!--[\r\n\t\s]*\[end inject vendors\][\r\n\t\s]*--\>/, newSrc)
     writeFileSync(htmlPath, htmlData)

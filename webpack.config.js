@@ -13,7 +13,6 @@ const dev_env = process.env.NODE_ENV == 'development';
 const createDllPlugin = () => {
     let plugins = []
     let floderPath = path.resolve(__dirname, `${dev_env ? 'dlldev' : 'dllpro'}`)
-    console.log(floderPath)
     if (!fileIsExist(floderPath)) {
         return plugins
     }
@@ -22,11 +21,17 @@ const createDllPlugin = () => {
     if (!files || files.length == 0) {
         return plugins
     }
+
     files.map((item, index) => {
         plugins.push(new Webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: path.resolve(__dirname, floderPath, `${item}`)
+            context: process.cwd(),
+            manifest: path.resolve(__dirname, floderPath, `${item}`),
+            name: 'vendor'
         }))
+        // plugins.push(new Webpack.DllReferencePlugin({
+        //     context: path.resolve(__dirname),
+        //     manifest: path.resolve(__dirname, floderPath, `${item}`)
+        // }))
     })
 
     return plugins
@@ -76,6 +81,7 @@ module.exports = {
         filename: SYSTEMNAME + '/bundle.js',
         publicPath: './'
     },
+    devtool: dev_env ? 'cheap-module-source-map' : false,
     module: {
         rules: [{
                 test: /\.(gif|jpg|jpeg|png|svg)$/i,
@@ -144,7 +150,6 @@ module.exports = {
             chunkFilename: SYSTEMNAME + '/[id].css',
         }),
         new HtmlWebpackPlugin({
-            title: 'My App',
             template: 'index.html',
             filename: 'index.html'
         }),
