@@ -33,7 +33,7 @@ const fileIsExist = (folderPath) => {
     } catch (error) {
         err = true
         console.error('no such files or directory!')
-        console.log(error)
+        // console.log(error)
     }
 
     if (err) {
@@ -70,10 +70,13 @@ const writeFileSync = (path, data) => {
  * @param {string[]} injectRegEx html中注入资源位置的正则匹配规则
  */
 const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx) => {
-    let emptyVerdor = `${injectRegEx[0]}\n${injectRegEx[1]}\n`
+    let emptyVerdor = `${injectRegEx[0]}\n\t${injectRegEx[1]}\n`
+    let htmlData = readFileSync(htmlPath)
     if (!fileIsExist(vendorFloderPath)) {
-        console.info('vendor 文件夹不存在！')
-        writeFileSync(htmlPath, emptyVerdor)
+        console.info('可以配置dll提高打包速度！')
+        htmlData = htmlData.replace(/\<!--[\r\n\t\s]*\[start inject vendors\][\r\n\t\s]*--\>([\s\S]*)\<!--[\r\n\t\s]*\[end inject vendors\][\r\n\t\s]*--\>/g, emptyVerdor)
+
+        writeFileSync(htmlPath, htmlData)
         return
     }
 
@@ -82,7 +85,6 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
         return
     }
 
-    let htmlData = readFileSync(htmlPath)
     let vendorList = getFilesName(vendorFloderPath).files || null
     let srcList = ''
     let newSrc = null
@@ -148,13 +150,13 @@ const clearVendors = (htmlPath, injectRegEx) => {
 /**
  * @param {string} path 被注入的目标html路径
  */
-function delDir(path){
+function delDir(path) {
     let files = [];
-    if(fs.existsSync(path)){
+    if (fs.existsSync(path)) {
         files = fs.readdirSync(path);
         files.forEach((file, index) => {
             let curPath = path + "/" + file;
-            if(fs.statSync(curPath).isDirectory()){
+            if (fs.statSync(curPath).isDirectory()) {
                 delDir(curPath); //递归删除文件夹
             } else {
                 fs.unlinkSync(curPath); //删除文件
