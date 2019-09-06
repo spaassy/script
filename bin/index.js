@@ -51,6 +51,10 @@ if (['clearDll'].indexOf(script) > -1) {
 	delDir(path.resolve(__dirname, '../dlldev'))
 	delDir(path.resolve(__dirname, '../dllpro'))
 
+	// 删除assets vendor
+	delDir(path.resolve(process.cwd(), 'src/assets/vendorsDev'))
+	delDir(path.resolve(process.cwd(), 'src/assets/vendorsPro'))
+
 	console.log('vendor 已清除！')
 	return
 }
