@@ -21,6 +21,8 @@ const args = process.argv.slice(2);
 const utils = require('../utils')
 const injectVendor = utils.injectVendor
 const clearVendors = utils.clearVendors
+const readFileSync = utils.readFileSync
+const writeFileSync = utils.writeFileSync
 const delDir = utils.delDir
 const path = require('path')
 
@@ -40,7 +42,7 @@ const sub = process.env.BUILD_TYPE || ''
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`]) + sub
 
-if(['clearDll'].indexOf(script) > -1){
+if (['clearDll'].indexOf(script) > -1) {
 	let htmlPath = path.resolve(srcPath, 'index.html')
 	let injectRegEx = ['<!-- [start inject vendors] -->', '<!-- [end inject vendors] -->']
 	clearVendors(htmlPath, injectRegEx)
@@ -74,12 +76,23 @@ if (['build', 'start', 'buildSub'].indexOf(script) > -1) {
 	injectVendor(htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
 }
 
+
+// 注入.babelrc
+const injectBabelrc = () => {
+	let babelPath = path.resolve(__dirname, '../.babelrc')
+	const babelData = readFileSync(babelPath)
+	const outPut = process.cwd()
+	writeFileSync(outPut + '/.babelrc', babelData)
+	return
+}
+
 switch (script) {
 	case 'dll':
 	case 'portalPublish':
 	case 'buildSub':
 	case 'build':
 	case 'start': {
+		injectBabelrc()
 		const result = spawn.sync(
 			'node',
 			nodeArgs
