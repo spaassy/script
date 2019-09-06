@@ -20,10 +20,12 @@ const spawn = require('react-dev-utils/crossSpawn');
 const args = process.argv.slice(2);
 const utils = require('../utils')
 const injectVendor = utils.injectVendor
+const clearVendors = utils.clearVendors
+const delDir = utils.delDir
 const path = require('path')
 
 const scriptIndex = args.findIndex(
-	x => x === 'build' || x === 'start' || x === 'buildSub' || x === 'portalPublish' || x === 'dll'
+	x => x === 'build' || x === 'start' || x === 'buildSub' || x === 'portalPublish' || x === 'dll' || x === 'clearDll'
 	// x => x === 'build' || x === 'eject' || x === 'start' || x === 'test'
 );
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
@@ -37,6 +39,31 @@ const ENV = process.env.NODE_ENV
 const sub = process.env.BUILD_TYPE || ''
 const _webpack = require(path.resolve(srcPath, '_spaassyConfig.js'))
 const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMNAME`]) + sub
+
+if(['clearDll'].indexOf(script) > -1){
+	let htmlPath = path.resolve(srcPath, 'index.html')
+	let injectRegEx = ['<!-- [start inject vendors] -->', '<!-- [end inject vendors] -->']
+	clearVendors(htmlPath, injectRegEx)
+
+	// 删除manifest文件夹
+	delDir(path.resolve(__dirname, '../dlldev'))
+	delDir(path.resolve(__dirname, '../dllpro'))
+
+	console.log('vendor 已清除！')
+	return
+}
+
+
+// 生产vendor之前先清除html中的vendor注入
+if (['dll'].indexOf(script) > -1) {
+	let htmlPath = path.resolve(srcPath, 'index.html')
+	let injectRegEx = ['<!-- [start inject vendors] -->', '<!-- [end inject vendors] -->']
+	clearVendors(htmlPath, injectRegEx)
+
+	// 删除manifest文件夹
+	let dllPath = ENV === 'development' ? path.resolve(__dirname, '../dlldev') : path.resolve(__dirname, '../dllpro')
+	delDir(dllPath)
+}
 
 // 往index.html 中注入 vendor
 if (['build', 'start', 'buildSub'].indexOf(script) > -1) {

@@ -73,8 +73,9 @@ const SYSTEMNAME = JSON.parse(_webpack.webpack.env_variable[`process.env.SYSTEMN
 module.exports = {
     output: {
         path: path.resolve(srcPath, 'dist' + sub),
-        filename: SYSTEMNAME + '/bundle.js',
-        publicPath: './'
+        filename: SYSTEMNAME + '/[name].js',
+        publicPath: './',
+        chunkFilename: SYSTEMNAME + '/[name].[chunkhash:5].chunk.js'
     },
     devtool: dev_env ? 'cheap-module-source-map' : false,
     module: {
@@ -138,9 +139,9 @@ module.exports = {
         ]
     },
     optimization: {
-        runtimeChunk: {
-            name: 'manifest'
-        },
+        // runtimeChunk: {
+        //     name: 'manifest'
+        // },
         splitChunks: {
             chunks: 'all',
             // miniSize: 30000,

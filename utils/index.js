@@ -120,10 +120,56 @@ const injectVendor = (htmlPath, vendorFloderPath, vendorPrefixPath, injectRegEx)
     writeFileSync(htmlPath, htmlData)
 }
 
+//  清除html中的vendor
+/**
+ * @param {string} htmlPath 被注入的目标html路径
+ */
+const clearVendors = (htmlPath, injectRegEx) => {
+    let emptyVerdor = `${injectRegEx[0]}\n\t${injectRegEx[1]}`
+    if (!fileIsExist(htmlPath)) {
+        console.info('html 文件不存在！')
+        return
+    }
+
+    let htmlData = readFileSync(htmlPath)
+
+    try {
+        htmlData = htmlData.replace(/\<!--[\r\n\t\s]*\[start inject vendors\][\r\n\t\s]*--\>([\s\S]*)\<!--[\r\n\t\s]*\[end inject vendors\][\r\n\t\s]*--\>/g, emptyVerdor)
+    } catch (err) {
+        console.log(err)
+        return
+    }
+
+    writeFileSync(htmlPath, htmlData)
+}
+
+
+// 删除文件夹
+/**
+ * @param {string} path 被注入的目标html路径
+ */
+function delDir(path){
+    let files = [];
+    if(fs.existsSync(path)){
+        files = fs.readdirSync(path);
+        files.forEach((file, index) => {
+            let curPath = path + "/" + file;
+            if(fs.statSync(curPath).isDirectory()){
+                delDir(curPath); //递归删除文件夹
+            } else {
+                fs.unlinkSync(curPath); //删除文件
+            }
+        });
+        fs.rmdirSync(path);
+    }
+}
+
 module.exports = {
     getFilesName,
     fileIsExist,
     readFileSync,
     writeFileSync,
-    injectVendor
+    injectVendor,
+    clearVendors,
+    delDir
 }
