@@ -148,7 +148,7 @@ const clearVendors = (htmlPath, injectRegEx) => {
 
 // 删除文件夹
 /**
- * @param {string} path 被注入的目标html路径
+ * @param {string} path 删除文件的路劲
  */
 function delDir(path) {
     let files = [];

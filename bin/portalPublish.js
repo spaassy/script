@@ -1,4 +1,4 @@
-const portal = require('../../../_spaassyProralConfig')
+const portal = require('../../../_spaassyProtalConfig')
 const fs = require('fs')
 const utils = require('../utils');
 
