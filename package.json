@@ -1,33 +1,45 @@
 {
-  "name": "spaassy-script",
-  "version": "1.0.1",
-  "private": true,
-  "description": "",
-  "keywords": [
-    "spaAssy",
-    "spa",
-    "react"
+  "__npminstall_done": "Thu Sep 05 2019 16:25:52 GMT+0800 (GMT+08:00)",
+  "_args": [
+    [
+      "git+https://github.com/spaassy/script.git",
+      "/Users/gabriel/Desktop/workspace/test/protal"
+    ]
   ],
+  "_from": "git+https://github.com/spaassy/script.git",
+  "_id": "spaassy-script@git+https://github.com/spaassy/script.git#11a212ecb1dda941975b3795825283a054c5d758",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/spaassy-script",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "git+https://github.com/spaassy/script.git",
+    "rawSpec": "git+https://github.com/spaassy/script.git",
+    "saveSpec": "git+https://github.com/spaassy/script.git",
+    "fetchSpec": "https://github.com/spaassy/script.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/spaassy/script.git#11a212ecb1dda941975b3795825283a054c5d758",
+  "_spec": "git+https://github.com/spaassy/script.git",
+  "_where": "/Users/gabriel/Desktop/workspace/test/protal",
+  "author": {
+    "name": "yvesZhang"
+  },
   "bin": {
     "spaAssyStart": "./bin/index.js"
   },
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/spaassy/script.git"
+  "bugs": {
+    "url": "https://github.com/spaassy/script/issues"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=devlopment node bin/start.js",
-    "build": "cross-env NODE_ENV=production node bin/build.js",
-    "dll": "cross-env NODE_ENV=production node bin/build.js"
-  },
-  "author": "yvesZhang",
-  "license": "ISC",
   "dependencies": {
     "react-dev-utils": "^9.0.3",
     "webpack-bundle-analyzer": "^3.4.1"
   },
+  "description": "spaAssy-template",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-helpers": "^6.24.1",
@@ -63,7 +75,25 @@
     "webpack-hot-middleware": "^2.24.4",
     "webpack-merge": "^4.2.1"
   },
-  "_from": "spaAssy-script@git+https://github.com/spaassy/script.git",
-  "_resolved": "https://github.com/spaassy/script.git#master",
-  "__npminstall_done": "Thu Sep 05 2019 16:25:52 GMT+0800 (GMT+08:00)"
+  "homepage": "https://github.com/spaassy/script#readme",
+  "keywords": [
+    "spaAssy",
+    "spa",
+    "react"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "spaassy-script",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spaassy/script.git"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production node bin/build.js",
+    "dll": "cross-env NODE_ENV=production node bin/build.js",
+    "start": "cross-env NODE_ENV=devlopment node bin/start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
 }

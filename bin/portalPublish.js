@@ -16,27 +16,57 @@ const injectScript = '<!-- inject script here -->'
 
 portal.subProject.map((item, index) => {
     const data = readFileSync(item.target)
-    const resource = {
+    let resource = {
         css: [],
         js: []
     }
     if (!item.resourcePattern) {
         return
     }
+    console.log(item.resourcePattern, 'item.resourcePattern')
     item.resourcePattern.map((sub, current) => {
         const strarry = sub.split('/')
         const len = strarry.length
         let regExp = null
-        let type = strarry[len - 1].split('.')[1]
+        let strBySplit = strarry[len - 1].split('.')
+        let strBySplitLen = strBySplit.length
+        let type = strBySplit[strBySplitLen - 1]
+
+        console.log(sub.split('*'))
+        let regStr = ''
+        let regStrList = sub.split('*')
+        let regStrLen = regStrList.length
+
+        if (regStrLen == 1) {
+            regStr = sub
+        } else {
+            regStrList.map((str, strIndex) => {
+                if (str == '') {
+                    return
+                }
+
+                if (!regStr) {
+                    regStr = `${str}`
+                } else {
+                    regStr = `${regStr}[a-zA-Z0-9]*${str}`
+                }
+            })
+        }
 
         if (type == 'css') {
-            regExp = new RegExp("\<link href=\"" + `${item.host}${sub}` + "\" rel=\"stylesheet\"\>")
+            regExp = new RegExp("\(<link href=\"" + `${item.host}${regStr}` + "\" rel=\"stylesheet\"\>)", 'g')
+            console.log(regExp)
         }
         if (type == 'js') {
-            regExp = new RegExp("\<script type=\"text\/javascript\" src=\"" + `${item.host}${sub}` + "\"></script>")
+            regExp = new RegExp("\(<script type=\"text\/javascript\" src=\"" + `${item.host}${regStr}` + "\"></script>)", 'g')
+            console.log(regExp)
         }
         const matchStr = data.match(regExp)
-        resource[type].push(...matchStr)
+        console.log(matchStr, '-----')
+        if (!matchStr) {
+            return
+        }
+        resource[type].push(...[matchStr[0]])
     })
 
     let addLink = ''
@@ -47,7 +77,9 @@ portal.subProject.map((item, index) => {
         }
         addLink = addLink + subCss + '\n'
     })
-    addLink = addLink + '\t' + injectLink + '\n'
+    addLink = addLink && addLink !== '' ? addLink + '\t' + injectLink + '\n' : '\t' + injectLink
+
+    console.log("====", addLink, 'addLink')
 
     resource.js.map((subJs, indexJs) => {
         if (portalHtmlData.indexOf(subJs) > -1) {
