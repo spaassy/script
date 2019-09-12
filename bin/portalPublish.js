@@ -23,7 +23,6 @@ portal.subProject.map((item, index) => {
     if (!item.resourcePattern) {
         return
     }
-    console.log(item.resourcePattern, 'item.resourcePattern')
     item.resourcePattern.map((sub, current) => {
         const strarry = sub.split('/')
         const len = strarry.length
@@ -32,7 +31,6 @@ portal.subProject.map((item, index) => {
         let strBySplitLen = strBySplit.length
         let type = strBySplit[strBySplitLen - 1]
 
-        console.log(sub.split('*'))
         let regStr = ''
         let regStrList = sub.split('*')
         let regStrLen = regStrList.length
@@ -62,7 +60,6 @@ portal.subProject.map((item, index) => {
             console.log(regExp)
         }
         const matchStr = data.match(regExp)
-        console.log(matchStr, '-----')
         if (!matchStr) {
             return
         }
@@ -78,8 +75,6 @@ portal.subProject.map((item, index) => {
         addLink = addLink + subCss + '\n'
     })
     addLink = addLink && addLink !== '' ? addLink + '\t' + injectLink + '\n' : '\t' + injectLink
-
-    console.log("====", addLink, 'addLink')
 
     resource.js.map((subJs, indexJs) => {
         if (portalHtmlData.indexOf(subJs) > -1) {

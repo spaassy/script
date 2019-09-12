@@ -75,6 +75,8 @@ module.exports = {
         path: path.resolve(srcPath, 'dist' + sub),
         filename: SYSTEMNAME + '/[name].js',
         publicPath: './',
+        libraryTarget: 'umd',
+        library: SYSTEMNAME + '_[name]',
         chunkFilename: SYSTEMNAME + '/[name].[chunkhash:5].chunk.js'
     },
     devtool: dev_env ? 'cheap-module-source-map' : false,
