@@ -53,11 +53,9 @@ portal.subProject.map((item, index) => {
 
         if (type == 'css') {
             regExp = new RegExp("\(<link href=\"" + `${item.host}${regStr}` + "\" rel=\"stylesheet\"\>)", 'g')
-            console.log(regExp)
         }
         if (type == 'js') {
             regExp = new RegExp("\(<script type=\"text\/javascript\" src=\"" + `${item.host}${regStr}` + "\"></script>)", 'g')
-            console.log(regExp)
         }
         const matchStr = data.match(regExp)
         if (!matchStr) {
